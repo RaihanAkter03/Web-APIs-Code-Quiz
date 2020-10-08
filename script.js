@@ -5,7 +5,9 @@ var time = document.querySelector("#time-header");
 var mainQuiz = document.querySelector(".container-fluid");
 
 var secondsLeft = 100;
-var score = 100;
+var passScore = "";
+var failScore = "";
+
 
 var quesAns = [
     {
@@ -41,7 +43,7 @@ mainQuiz.appendChild(headerH2);
 headerH2.setAttribute("class", "header1");
 
 var headerH5 = document.createElement("h5");
-headerH5.textContent = "Try to answer the following code related questions within the time limit. Keep in mind that incorrect answer will penalize your score time by ten second";
+headerH5.textContent = "Try to answer the following code related questions within the time limit. Keep in mind that incorrect answer will penalize your score time by twenty second";
 mainQuiz.appendChild(headerH5);
 headerH5.setAttribute("class", "header2");
 
@@ -52,19 +54,33 @@ startButton.setAttribute("id", "start-button");
 
 var round = 0;
 
+//click on start quiz button
 startButton.addEventListener("click", startgame)
 
+// function fo rstart the game
 function startgame() { 
     setTime();
-    // round = 0;
     generateQuestions();
 };
 
+//time counting start from 100 second..
+function setTime() {
+    var timerInterval = setInterval(function () {
+        secondsLeft--;
+        var timeLeft = document.querySelector(".time-left");
+        timeLeft.textContent = secondsLeft;
+        if (secondsLeft === 0) {
+            clearInterval(timerInterval);
+            gameOver();
+        }
+    }, 1000);
+}
+
+//functon for generate question and answer..
 function generateQuestions() { 
 
     var question = quesAns[round].ques;
         mainQuiz.textContent = question;
-    // console.log(mainQuiz.textContent = question);
     
     for (var j = 0; j < quesAns[round].option.length; j++) {
         var ansLi = document.createElement("div");
@@ -74,9 +90,9 @@ function generateQuestions() {
 
         mainQuiz.appendChild(ansLi);
         mainQuiz.appendChild(ansButton);
-        console.log(ansButton);
+        // console.log(ansButton);
 
-        ansLi.setAttribute("class", "ans-div")
+        // ansLi.setAttribute("class", "ans-div")
         ansButton.setAttribute("class", "answer");
         
         ansButton.setAttribute("innertext", quesAns[round].option[j]);
@@ -86,43 +102,45 @@ function generateQuestions() {
     
 };
 
+// function for checking answer 
 function checkAnswers(event) {
+    event.preventDefault();
     var element = event.target;
     if (element.matches("button") === true) {
-        // alert("question number 1");
         
         var actualresult = quesAns[round].ans;        
         var expectedValue = element.getAttribute("innertext");
 
         console.log(expectedValue);
-
+        
         if (actualresult !== expectedValue) {
-            score = score - 20;
-            console.log("Fail");
-            
-        } else { 
-            console.log("Pass");
+            secondsLeft = secondsLeft - 10;
+            failScore = parseFloat(failScore - 20);
+            console.log("fail score " + failScore);
+
+        } else {
+            passScore = parseFloat(passScore + 20);
+            console.log("pass score" + passScore);
         }
     }
     round++;
     if (round < quesAns.length) {
         generateQuestions();
     } else { 
-        // round++;
         gameOver();
     }
         
 };
 
+// gameover funciton for local storage 
 function gameOver() {
-
     var alldone = document.createElement("h1");
     mainQuiz.textContent = "All Done!"
     mainQuiz.appendChild(alldone);
     alldone.setAttribute("class", "all-done");
 
     var finalScore = document.createElement("h6");
-    finalScore.textContent = "Your Final Score is : " + score;
+    finalScore.textContent = "Your Final Score is : " + passScore;
     mainQuiz.appendChild(finalScore);
     finalScore.setAttribute("class", "final-score");
 
@@ -137,14 +155,12 @@ function gameOver() {
     submitButton.setAttribute("type", "submit");
     submitButton.setAttribute("id", "submit-button");
     submitButton.setAttribute("value", "Submit");
-    // submitButton.setAttribute("href", "./score.html");
     mainQuiz.appendChild(submitButton);
 
     submitButton.addEventListener("click", function (event) {
         
         event.preventDefault();
         var initial = document.querySelector(".fname").value;
-        // console.log(initial);
 
         if (initial == "") {
             var paragraph = document.createElement("p");
@@ -154,7 +170,7 @@ function gameOver() {
         } else {
             var scoreObject = {
                 name: initial,
-                score: score
+                score: passScore
             };
 
             localStorage.setItem('score', JSON.stringify(scoreObject));
@@ -163,17 +179,8 @@ function gameOver() {
     });    
 };
 
+//****************************End of the script *************************************/
 
-function setTime() {
-    var timerInterval = setInterval(function () {
-         secondsLeft--;
-    var timeLeft = document.querySelector(".time-left");
-        timeLeft.textContent = secondsLeft;
 
-        if (secondsLeft === 0 ) {
-            clearInterval(timerInterval);            
-        }
-    }, 1000);
-}
 
 
