@@ -1,0 +1,85 @@
+.container-fluid{
+    text-align: center;
+    color: darkslateblue;
+}
+
+#main-container{
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
+    color: darkslateblue;
+}
+
+#start-button{
+    margin-top: 5%;
+    font-size: 20px;
+    border-radius: 8px;
+    background-color: darkslateblue;
+    color:white
+}
+.header1{
+    margin-bottom: 25px;
+    
+}
+.header1,.header2{
+    text-align: center;
+    margin-left: 25%; 
+    margin-right: 25%;
+}
+.answer{
+
+    border-radius: 8px;
+    background-color: darkslateblue;
+    color:white;
+    font-size:15px;
+    display:inline-block;
+    
+}
+.answer:hover{
+    background: lightblue;
+}
+.all-done{
+    margin-bottom: 15px;
+    font-weight: 600;
+    font-size: 24px;
+}
+.final-score{
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+.fname{
+    margin:15px;
+    font-size: 20px;
+    display:inline-block;
+    border-radius: 8px;
+    padding: 0px 0px;
+    background-color: lightsteelblue; 
+}
+#submit-button{
+    border-radius: 8px;
+    background-color: darkslateblue;
+    color:white;
+    font-size:20px;
+    display:inline-block;
+}
+
+.initial-miss{
+font-size: 15px;
+color:red;
+}
+
+#scoreContainer{
+    font-size: 20px;
+    font-weight: 600;
+    /* margin-bottom: 20px; */
+    background-color: lightpink;
+}
+.GO-Back , .clear{
+    /* margin-top: 20px; */
+    margin:15px;
+    display:inline-block;
+    border-radius: 8px;
+    background-color: darkslateblue;
+    color:white
+
+}
