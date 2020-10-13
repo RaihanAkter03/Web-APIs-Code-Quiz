@@ -31,6 +31,14 @@ WHEN the game is over
 THEN I can save my initials and score
 ```
 
+## Description:
+when Click on the start quiz button , time counting will start and one question will show.
+after answering one question , correct anser will add 20 point , incorrect answer will subtract 20 point and 10 second from time.
+after you reach 5 question application will ask for initial or full name for showing result .
+if you miss to enter full name and click submit button , appplication will show red color warning to enter the name . 
+after entering full name you will be able to see you highscore. clear the highscore by clicking on glear highscore button or back to start page by clicking on GO back button .
+you can also see last score by click on View High score link from first page . 
+
 
 The following animation demonstrates the application functionality:
 
